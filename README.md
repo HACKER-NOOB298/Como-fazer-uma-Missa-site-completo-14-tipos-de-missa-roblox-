@@ -2,6 +2,8 @@
 
 Este repositório é um kit completo para seminaristas e celebrantes do mapa **The Old Robloxian Church**. Ele une conhecimento litúrgico com ferramentas técnicas para melhorar a experiência de Roleplay (RP) no PC.
 
+> **CASO NÃO QUEIRA LER TUDO, LEIA OS AVISOS**
+
 > [!WARNING]
 > **COMPATIBILIDADE:** Testado e funcional no jogo *The Old Robloxian Church*. Não há garantia de funcionamento em outros mapas.
 > **COMPATILIBILIDADE:** Não sei se funcione em outros jogos de missa, mas provavelmente funcione. O Script é proprio pra PC e há uma ordem pra seguir.
@@ -17,6 +19,9 @@ Este repositório é um kit completo para seminaristas e celebrantes do mapa **T
 ---
 
 ## 📂 Conteúdo do Repositório
+
+> .[!WARNING].
+> **EXECUTE O PRIMEIRO SCRIPT** **(Exploit One) POIS ELE É O PRINCIPAL**, **DEPOIS DELE EXECUTE O SEGUNDO (Exploite Two)**
 
 
 | Arquivo/Pasta | Descrição |
