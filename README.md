@@ -48,3 +48,21 @@ Este repositório é um kit completo para seminaristas e celebrantes do mapa **T
 O uso de executores/scripts é por sua conta e risco. Este material foi criado exclusivamente para auxiliar no realismo das cerimônias de Roleplay dentro da comunidade.
 
 ---
+
+## ESTRUTURA DA MISSA
+
+1 - antifona de entrada
+
+2 - oração coleta
+
+3 - primeira leitura
+
+4 - salmo responsorial
+
+5 - segunda leitura
+
+6 - evangelho 
+
+7 - oração da asssembleia
+
+8 - Terminação da missa (pode terminar na 7)
