@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Completo de Missas — The Old Robloxian Church</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a6230;
+    --burgundy: #5c1a1a;
+    --burgundy-dark: #3a0f0f;
+    --burgundy-mid: #7a2020;
+    --cream: #f5efe0;
+    --cream-dark: #e8dcc8;
+    --ink: #1a0f08;
+    --parchment: #faf6ed;
+    --sidebar-w: 300px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    background: var(--ink);
+    color: var(--cream);
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--burgundy-dark) 0%, #1e0808 100%);
+    border-right: 2px solid var(--gold-dim);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  #sidebar-header {
+    padding: 28px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--gold-dim);
+    background: linear-gradient(180deg, rgba(201,168,76,0.12) 0%, transparent 100%);
+  }
+
+  #sidebar-header .cross {
+    font-size: 2.2rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+    text-shadow: 0 0 20px rgba(201,168,76,0.5);
+  }
+
+  #sidebar-header h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  #sidebar-header p {
+    font-size: 0.72rem;
+    color: var(--gold-dim);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  #mass-list {
+    list-style: none;
+    padding: 12px 0;
+    flex: 1;
+  }
+
+  #mass-list li {
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  #mass-list li a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--cream-dark);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  #mass-list li a:hover,
+  #mass-list li a.active {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-light);
+    padding-left: 28px;
+    border-left: 3px solid var(--gold);
+  }
+
+  #mass-list li a .num {
+    color: var(--gold-dim);
+    margin-right: 8px;
+    font-size: 0.65rem;
+  }
+
+  /* ── MAIN ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    min-height: 100vh;
+    background: var(--ink);
+  }
+
+  .mass-section {
+    display: none;
+    padding: 0;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .mass-section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hero */
+  .mass-hero {
+    padding: 60px 60px 40px;
+    border-bottom: 2px solid var(--gold-dim);
+    background: linear-gradient(135deg, var(--burgundy-dark) 0%, #120808 60%, var(--ink) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mass-hero::before {
+    content: '✝';
+    position: absolute;
+    right: 60px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 8rem;
+    color: rgba(201,168,76,0.06);
+    pointer-events: none;
+  }
+
+  .mass-hero .tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .mass-hero h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.4rem;
+    color: var(--gold-light);
+    line-height: 1.2;
+    text-shadow: 0 2px 30px rgba(201,168,76,0.3);
+    margin-bottom: 20px;
+  }
+
+  .vestment-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--gold-dim);
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 8px;
+  }
+
+  .vestment-box .vest-icon { font-size: 1.6rem; }
+
+  .vestment-box .vest-info { font-size: 0.85rem; color: var(--cream-dark); }
+
+  .vestment-box .vest-info strong {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Content */
+  .mass-content {
+    padding: 40px 60px 80px;
+    max-width: 960px;
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0 24px;
+  }
+
+  .section-divider h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-dim) 0%, transparent 100%);
+  }
+
+  /* Step cards */
+  .step {
+    margin-bottom: 16px;
+    border-left: 2px solid var(--gold-dim);
+    padding: 0 0 0 20px;
+    position: relative;
+  }
+
+  .step::before {
+    content: '✦';
+    position: absolute;
+    left: -8px; top: 2px;
+    font-size: 0.6rem;
+    color: var(--gold);
+    background: var(--ink);
+    padding: 2px 0;
+  }
+
+  .step-line {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: start;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 4px;
+    padding: 14px 18px;
+    transition: background 0.2s;
+  }
+
+  .step-line:hover { background: rgba(201,168,76,0.05); }
+
+  .step-line.action {
+    grid-template-columns: 1fr;
+    background: rgba(201,168,76,0.04);
+    border-color: rgba(201,168,76,0.2);
+  }
+
+  .fala {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .fala::before { content: '"'; color: var(--gold-dim); font-size: 1.2em; }
+  .fala::after { content: '"'; color: var(--gold-dim); font-size: 1.2em; }
+
+  .fala.action-text {
+    font-style: normal;
+    color: var(--gold-dim);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    font-family: 'Cinzel', serif;
+  }
+
+  .fala.action-text::before,
+  .fala.action-text::after { content: ''; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    height: fit-content;
+  }
+
+  .badge-item {
+    background: rgba(92,26,26,0.6);
+    border: 1px solid var(--burgundy-mid);
+    color: #e8b0b0;
+  }
+
+  .badge-anim {
+    background: rgba(30,50,80,0.6);
+    border: 1px solid #2a4a70;
+    color: #a0c0e8;
+  }
+
+  .badge-none {
+    background: rgba(60,60,60,0.4);
+    border: 1px solid #444;
+    color: #888;
+  }
+
+  /* People response */
+  .people-response {
+    margin: 8px 0 8px 20px;
+    padding: 10px 16px;
+    background: rgba(201,168,76,0.06);
+    border-left: 2px solid rgba(201,168,76,0.3);
+    font-size: 0.85rem;
+    color: var(--gold-dim);
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .people-response::before {
+    content: '👥 Povo: ';
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--gold-dim);
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+  }
+
+  .legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--cream-dark);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.04em;
+  }
+
+  /* Welcome */
+  #welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 60px;
+    background: radial-gradient(ellipse at center, rgba(92,26,26,0.3) 0%, transparent 70%);
+  }
+
+  #welcome .big-cross {
+    font-size: 5rem;
+    color: var(--gold);
+    margin-bottom: 30px;
+    display: block;
+    text-shadow: 0 0 60px rgba(201,168,76,0.4);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { text-shadow: 0 0 40px rgba(201,168,76,0.3); }
+    50% { text-shadow: 0 0 80px rgba(201,168,76,0.6); }
+  }
+
+  #welcome h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.8rem;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  #welcome p {
+    font-size: 1.1rem;
+    color: var(--cream-dark);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  #welcome .select-hint {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    border: 1px solid var(--gold-dim);
+    padding: 10px 24px;
+    border-radius: 2px;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--burgundy-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <span class="cross">✝</span>
+    <h1>Guia de Missas<br>Robloxian Church</h1>
+    <p>Falas · Itens · Animações</p>
+  </div>
+  <ul id="mass-list">
+    <li><a href="#" onclick="show('solene')"><span class="num">01</span>Missa Solene</a></li>
+    <li><a href="#" onclick="show('cantada')"><span class="num">02</span>Missa Cantada</a></li>
+    <li><a href="#" onclick="show('rezada')"><span class="num">03</span>Missa Rezada</a></li>
+    <li><a href="#" onclick="show('pontifical')"><span class="num">04</span>Missa Pontifical</a></li>
+    <li><a href="#" onclick="show('preceito')"><span class="num">05</span>Missa de Preceito</a></li>
+    <li><a href="#" onclick="show('vigilia')"><span class="num">06</span>Missa de Vigília</a></li>
+    <li><a href="#" onclick="show('votiva')"><span class="num">07</span>Missa Votiva</a></li>
+    <li><a href="#" onclick="show('requiem')"><span class="num">08</span>Missa de Réquiem</a></li>
+    <li><a href="#" onclick="show('nupcial')"><span class="num">09</span>Missa Nupcial</a></li>
+    <li><a href="#" onclick="show('crismal')"><span class="num">10</span>Missa Crismal</a></li>
+    <li><a href="#" onclick="show('campal')"><span class="num">11</span>Missa Campal</a></li>
+    <li><a href="#" onclick="show('tridentina')"><span class="num">12</span>Missa Tridentina</a></li>
+    <li><a href="#" onclick="show('liturgia')"><span class="num">13</span>Divina Liturgia</a></li>
+    <li><a href="#" onclick="show('normal')"><span class="num">14</span>Missa Normal</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- WELCOME -->
+  <div id="welcome">
+    <span class="big-cross">✝</span>
+    <h1>Guia Completo<br>de Missas</h1>
+    <p>Falas completas do padre, itens do jogo e animações para cada tipo de missa. Selecione um tipo na barra lateral para começar.</p>
+    <div class="select-hint">← Selecione uma missa</div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- 01. MISSA SOLENE -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="section-solene" class="mass-section">
+    <div class="mass-hero">
+      <span class="tag">✦ Tipo 01</span>
+      <h2>Missa Solene</h2>
+      <div class="vestment-box">
+        <span class="vest-icon">👘</span>
+        <div class="vest-info">
+          <strong>Vestimenta</strong>
+          Casula Branca ou Dourada + Estola + Alba + Cíngulo · Páscoa/Natal<br>
+          Casula Verde + Estola · Tempo Comum<br>
+          Casula Roxa + Estola · Quaresma/Advento<br>
+          Casula Vermelha · Pentecostes/Mártires
+        </div>
+      </div>
+    </div>
+    <div class="mass-content">
+      <div class="legend">
+        <span><span class="badge badge-item">ITEM</span> Item a equipar</span>
+        <span><span class="badge badge-anim">ANIMAÇÃO</span> Animação a usar</span>
+        <span><span class="badge badge-none">SEM ITEM</span> Sem item equipado</span>
+      </div>
+
+      <div class="section-divider"><h3>⛪ Ritos Iniciais</h3></div>
+
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Procissão de entrada — caminhe do fundo da igreja até o altar</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Incensação do altar — caminhe ao redor incensando</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Em nome do Pai, e do Filho, e do Espírito Santo.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">A graça de Nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">O Senhor esteja convosco.</div>
+      </div>
+
+      <div class="section-divider"><h3>🕊 Ato Penitencial</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Irmãos, reconheçamos os nossos pecados para celebrarmos dignamente estes santos mistérios.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bow</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Confesso a Deus todo-poderoso e a vós, irmãos, que pequei muitas vezes por pensamentos e palavras, atos e omissões, por minha culpa, minha culpa, minha máxima culpa. E peço à bem-aventurada Virgem Maria, aos anjos, aos santos e a vós, irmãos, que rogueis por mim a Deus nosso Senhor.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bow</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Senhor, tende piedade de nós.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Senhor, tende piedade de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Cristo, tende piedade de nós.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Cristo, tende piedade de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Senhor, tende piedade de nós.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Senhor, tende piedade de nós.</div>
+      </div>
+
+      <div class="section-divider"><h3>🎶 Glória</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Glória a Deus nas alturas, e paz na terra aos homens por Ele amados. Senhor Deus, rei dos céus, Deus Pai todo-poderoso, nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho do Pai, vós que tirais o pecado do mundo, tende piedade de nós; vós que tirais o pecado do mundo, acolhei a nossa súplica; vós que estais à direita do Pai, tende piedade de nós. Porque só vós sois o Santo, só vós o Senhor, só vós o Altíssimo, Jesus Cristo, com o Espírito Santo, na glória de Deus Pai. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+
+      <div class="section-divider"><h3>🙏 Oração Coleta</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Ó Deus, que manifestais vossa onipotência sobretudo pela misericórdia e pelo perdão, multiplicai sobre nós a vossa graça, para que, caminhando para os bens que prometestes, sejamos feitos participantes dos bens celestiais. Por Nosso Senhor Jesus Cristo, vosso Filho, que convosco vive e reina na unidade do Espírito Santo, Deus, para sempre.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>📖 Liturgia da Palavra</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Leitura do Livro dos Atos dos Apóstolos. Naqueles dias, Pedro tomou a palavra e disse: Sabeis o que aconteceu em toda a Judeia, a começar pela Galileia, depois do batismo que João pregou: como Deus ungiu com o Espírito Santo e com poder a Jesus de Nazaré, que andou fazendo o bem e curando todos os que estavam sob o poder do diabo, porque Deus estava com Ele. Nós somos testemunhas de tudo o que Ele fez na terra dos judeus e em Jerusalém. Palavra do Senhor.</div>
+          <span class="badge badge-item">Server Book</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Salmo 117. Dai graças ao Senhor porque Ele é bom, porque é eterna a sua misericórdia. Diga a casa de Israel: é eterna a sua misericórdia. A destra do Senhor age com poder, a destra do Senhor se levantou, a destra do Senhor age com poder. Não hei de morrer, mas hei de viver para contar as obras do Senhor. A pedra que os construtores rejeitaram tornou-se a pedra angular. Isso é obra do Senhor, e é maravilhoso a nossos olhos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Leitura da Primeira Carta de São João. Caríssimos, tudo o que nasceu de Deus vence o mundo, e esta é a vitória que venceu o mundo: a nossa fé. Quem vence o mundo senão aquele que crê que Jesus é o Filho de Deus? Este é o que veio pela água e pelo sangue: Jesus Cristo. Não somente pela água, mas pela água e pelo sangue. E o Espírito é que dá testemunho, porque o Espírito é a verdade. Palavra do Senhor.</div>
+          <span class="badge badge-item">Server Book</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+
+      <div class="section-divider"><h3>✝ Evangelho e Homilia</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Aleluia, Aleluia! Tu és meu Filho amado, em ti me comprazo. Aleluia!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Proclamação do Santo Evangelho de Nosso Senhor Jesus Cristo segundo João.</div>
+          <span class="badge badge-item">Gospel</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+        <div class="people-response">Glória a vós, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Naquele tempo, estando cerradas as portas do lugar onde se achavam os discípulos com medo dos judeus, Jesus veio, pôs-se no meio deles e disse-lhes: A paz esteja convosco. Dito isso, mostrou-lhes as mãos e o lado. Os discípulos encheram-se de alegria ao ver o Senhor. Jesus disse-lhes outra vez: A paz esteja convosco. Como o Pai me enviou, assim eu também vos envio. Dito isso, soprou sobre eles e disse: Recebei o Espírito Santo. A quem perdoardes os pecados, ser-lhes-ão perdoados; a quem os retiverdes, ser-lhes-ão retidos. Palavra da Salvação.</div>
+          <span class="badge badge-item">Gospel</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Glória a vós, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Queridos irmãos e irmãs, o Evangelho que acabamos de proclamar nos apresenta o Cristo Ressuscitado no meio dos seus discípulos. Eles estavam com medo, escondidos, com as portas fechadas. Mas Jesus atravessa todas as barreiras humanas e se coloca no meio deles, dizendo: A paz esteja convosco. Essa paz não é a paz que o mundo oferece, que depende de circunstâncias externas, de ausência de conflitos ou de conforto material. É a paz profunda que nasce da certeza de que Deus não abandona os seus filhos, de que o amor é mais forte do que a morte, de que o pecado não tem a última palavra. Jesus não repreende os discípulos pelo medo, pela dúvida, pelo fechamento. Ele os encontra onde estão, no meio das suas fragilidades, e lhes oferece o dom precioso do Espírito Santo. É esse mesmo Espírito que foi derramado sobre nós no Batismo e na Confirmação, que nos renova cada vez que nos aproximamos dos sacramentos. Nós também, como os discípulos, somos chamados hoje a sair das nossas portas fechadas, a vencer os nossos medos e as nossas dúvidas, e a anunciar com alegria ao mundo que Jesus Cristo ressuscitou, que Ele vive, que Ele transforma corações e vidas. Que o Senhor nos conceda a graça de sermos testemunhas corajosas desta alegria pascal na nossa vida cotidiana. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+
+      <div class="section-divider"><h3>📜 Credo e Oração dos Fiéis</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Creio em um só Deus, Pai todo-poderoso, criador do céu e da terra, de todas as coisas visíveis e invisíveis. Creio em um só Senhor, Jesus Cristo, Filho Unigênito de Deus, nascido do Pai antes de todos os séculos: Deus de Deus, Luz da Luz, Deus verdadeiro de Deus verdadeiro; gerado, não criado, consubstancial ao Pai. Por Ele todas as coisas foram feitas. E por nós, homens, e para nossa salvação desceu dos céus: e se encarnou pelo Espírito Santo, no seio da Virgem Maria, e se fez homem. Foi crucificado por nós sob Pôncio Pilatos; padeceu e foi sepultado. Ressuscitou ao terceiro dia, conforme as Escrituras; subiu aos céus, está sentado à direita do Pai. E de novo há de vir em sua glória para julgar os vivos e os mortos; e o seu reino não terá fim. Creio no Espírito Santo, Senhor que dá a vida, e procede do Pai e do Filho; e com o Pai e o Filho é adorado e glorificado: Ele que falou pelos profetas. Creio na Igreja una, santa, católica e apostólica. Professo um só Batismo para a remissão dos pecados. Espero a ressurreição dos mortos e a vida do mundo que há de vir. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Irmãos, apresentemos as nossas súplicas ao Senhor nosso Deus que cuida de nós com amor de Pai. Pela Santa Igreja espalhada pelo mundo inteiro, para que o Espírito Santo a guie sempre na proclamação fiel do Evangelho e no serviço aos mais pobres, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Por todos os governantes e líderes do mundo, para que governem com sabedoria, justiça e busquem sempre a paz entre os povos, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Pelos doentes, pelos que sofrem, pelos que se encontram na solidão e no abandono, para que sintam o conforto de Deus e a caridade da comunidade cristã, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Por todos nós aqui reunidos nesta celebração, para que esta Eucaristia nos una mais profundamente a Cristo e nos envie como testemunhas do seu amor ao mundo, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Ó Deus, que conheceis as necessidades de vossos filhos antes mesmo que as expressemos, acolhei as nossas preces e concedei-nos o que pedimos, segundo a vossa santa vontade. Por Cristo Nosso Senhor.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>🍞 Liturgia Eucarística — Preparação das Ofertas</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Bendito sejais, Senhor Deus do universo, pelo pão que recebemos da vossa bondade, fruto da terra e do trabalho humano, e que vos apresentamos: ele se tornará para nós o pão da vida.</div>
+          <span class="badge badge-item">Offering of the Bread</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Bendito seja Deus para sempre.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Bendito sejais, Senhor Deus do universo, pelo vinho que recebemos da vossa bondade, fruto da videira e do trabalho humano, e que vos apresentamos: ele se tornará para nós o cálice da salvação.</div>
+          <span class="badge badge-item">Offering of Chalice</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Bendito seja Deus para sempre.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Pela humildade do coração e com espírito contrito sejamos acolhidos por vós, Senhor; e que o nosso sacrifício suba hoje à vossa presença e vos seja agradável.</div>
+          <span class="badge badge-item">Cruets</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Incensação solene das ofertas, do altar e do povo — use o Thurible</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Lavai-me, Senhor, da minha culpa, purificai-me do meu pecado.</div>
+          <span class="badge badge-item">Lavabo</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Orai, irmãos, para que este sacrifício, meu e vosso, seja agradável a Deus Pai todo-poderoso.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">O Senhor receba das vossas mãos este sacrifício para louvor e glória do seu nome, para nosso bem e de toda a sua santa Igreja.</div>
+      </div>
+
+      <div class="section-divider"><h3>🕊 Oração Eucarística e Consagração</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Corações ao alto.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Nossos corações estão junto do Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Demos graças ao Senhor nosso Deus.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">É nosso dever e nossa salvação.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Na verdade é nosso dever e nossa salvação dar-vos graças em todo o tempo e em todo o lugar, Senhor, Pai santo, Deus eterno e todo-poderoso, por Cristo Senhor nosso. Pois Ele é o verdadeiro sacerdote eterno, o qual se ofereceu a vós como sacrifício imaculado de paz, e nos distribuiu o mistério de vossa redenção. Ele, quebrando o pão e distribuindo-o, dá-se a si mesmo; e, derramando o sangue, lava os pecados de todos. Por isso, com todos os anjos e santos, proclamamos a vossa glória, cantando a uma só voz.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Santo, Santo, Santo, é o Senhor Deus do universo! O céu e a terra proclamam a vossa glória. Hosana nas alturas! Bendito o que vem em nome do Senhor. Hosana nas alturas!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Na verdade, Pai santíssimo, é justo e necessário, é nosso dever e nossa salvação dar-vos sempre graças por Jesus Cristo, vosso Filho amado. Por Ele é que nos criastes, enchestes de vossos benefícios e nos enviastes como Redentor, feito homem pelo Espírito Santo e nascido da Virgem. Ele, cumprindo a vossa vontade e adquirindo para vós um povo santo, estendeu as mãos ao sofrimento para libertar da morte os que criam em vós. Suplicamos-vos, Pai de bondade: santificai estas oferendas pelo mesmo Espírito; dignai-vos transformá-las no Corpo e no Sangue de Jesus Cristo, Senhor nosso, que vai entregar-se livremente à sua paixão.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Toca os sinos antes da Consagração</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Na véspera de sua paixão, tomou o pão nas suas mãos santas e veneráveis, e elevando os olhos ao céu, para vós, Deus seu Pai todo-poderoso, deu graças, partiu o pão e o deu a seus discípulos, dizendo: Tomai e comei todos vós, porque isto é o meu Corpo, que será entregue por vós.</div>
+          <span class="badge badge-item">Eucharist</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Eleva a hóstia consagrada — toca os sinos</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Do mesmo modo, ao fim da ceia, tomou o cálice nas suas mãos santas e veneráveis, e, dando graças novamente a vós, Deus seu Pai, o entregou a seus discípulos, dizendo: Tomai e bebei todos vós, porque este é o cálice do meu Sangue, o Sangue da nova e eterna aliança, que será derramado por vós e por todos, para a remissão dos pecados. Fazei isto em memória de mim.</div>
+          <span class="badge badge-item">Chalice Offering</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Eleva o cálice consagrado — toca os sinos</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Eis o mistério da fé!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Anunciamos, Senhor, a vossa morte e proclamamos a vossa ressurreição. Vinde, Senhor Jesus!</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Celebrando agora o memorial da morte e ressurreição de vosso Filho, oferecemos-vos, Senhor, o pão da vida e o cálice da salvação, e vos agradecemos porque nos tornastes dignos de assistir à vossa presença e de vos servir. Suplicamos-vos humildemente que, participando do Corpo e do Sangue de Cristo, sejamos reunidos pelo Espírito Santo em um só corpo. Lembrai-vos, Senhor, de vossa Igreja espalhada por toda a terra; fazei-a crescer na caridade, juntamente com nosso Papa, com todo o episcopado e com o clero. Tende piedade de todos nós e dai-nos participar da vida eterna juntamente com a Bem-Aventurada Virgem Maria, Mãe de Deus, com os apóstolos e mártires, e com todos os santos que em todos os tempos vos foram agradáveis, e possamos louvar-vos e glorificar-vos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Por Cristo, com Cristo e em Cristo, a vós, Deus Pai todo-poderoso, na unidade do Espírito Santo, toda a honra e toda a glória, agora e para sempre.</div>
+          <span class="badge badge-item">Doxology 1</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>🙏 Rito da Comunhão</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Fiéis ao ensinamento do Salvador e seguindo sua divina instrução, ousamos dizer: Pai nosso que estais nos céus, santificado seja o vosso nome, venha a nós o vosso reino, seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje, perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido, e não nos deixeis cair em tentação, mas livrai-nos do mal.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Pois vosso é o reino, o poder e a glória para sempre, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Livrai-nos, Senhor, de todos os males passados, presentes e futuros; e por intercessão da bem-aventurada e gloriosa sempre Virgem Maria, Mãe de Deus, do bem-aventurado são José, dos bem-aventurados apóstolos Pedro e Paulo, e de todos os santos, dai-nos propícios a paz em nossos dias, para que, ajudados por vossa misericórdia, estejamos sempre livres do pecado e seguros de toda perturbação. Por Nosso Senhor Jesus Cristo, vosso Filho.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Pois vosso é o reino, o poder e a glória para sempre, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">A paz do Senhor esteja sempre convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">O Senhor esteja convosco.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Dai um sinal de paz uns aos outros.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Cordeiro de Deus, que tirais o pecado do mundo, tende piedade de nós. Cordeiro de Deus, que tirais o pecado do mundo, tende piedade de nós. Cordeiro de Deus, que tirais o pecado do mundo, dai-nos a paz.</div>
+          <span class="badge badge-item">Angus Dei</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Eis o Cordeiro de Deus que tira o pecado do mundo. Felizes os chamados à Ceia do Senhor.</div>
+          <span class="badge badge-item">Raised Host 2</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Senhor, não sou digno de que entreis em minha morada, mas dizei uma só palavra e serei salvo.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Corpo de Cristo.</div>
+          <span class="badge badge-item">Communion (Priest)</span>
+          <span class="badge badge-anim">Kneel</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Sangue de Cristo.</div>
+          <span class="badge badge-item">Drink Chalice</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Corpo de Cristo.</div>
+          <span class="badge badge-item">Ciborium 1</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen. (cada fiel)</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Senhor, tornastes em alegria o nosso luto; nada nos faltará porque vós sois nosso pastor. Vós que habitais em nós pelo vosso Corpo e pelo vosso Sangue, fortalecei-nos, dai-nos o fervor da vossa caridade, para que o que celebramos nas sagradas espécies, realizemos com obras nos nossos irmãos. Por Cristo Nosso Senhor. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+
+      <div class="section-divider"><h3>✝ Ritos Finais</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Que vos abençoe Deus todo-poderoso, Pai, e Filho, e Espírito Santo.</div>
+          <span class="badge badge-item">Blessing</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">A missa está encerrada. Ide em paz.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Reverência ao altar — Bow — e procissão de saída</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- 08. MISSA DE RÉQUIEM -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="section-requiem" class="mass-section">
+    <div class="mass-hero">
+      <span class="tag">✦ Tipo 08</span>
+      <h2>Missa de Réquiem</h2>
+      <div class="vestment-box">
+        <span class="vest-icon">🖤</span>
+        <div class="vest-info">
+          <strong>Vestimenta</strong>
+          Casula Preta (tradicional) ou Roxa · Estola Preta ou Roxa · Alba · Cíngulo<br>
+          Cor preta representa luto e intercessão pelos defuntos
+        </div>
+      </div>
+    </div>
+    <div class="mass-content">
+      <div class="legend">
+        <span><span class="badge badge-item">ITEM</span> Item a equipar</span>
+        <span><span class="badge badge-anim">ANIMAÇÃO</span> Animação a usar</span>
+        <span><span class="badge badge-none">SEM ITEM</span> Sem item equipado</span>
+      </div>
+
+      <div class="section-divider"><h3>⛪ Ritos Iniciais</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Em nome do Pai, e do Filho, e do Espírito Santo.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">A graça de Nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">O Senhor esteja convosco.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Irmãos, reunimo-nos hoje para celebrar a Eucaristia em sufrágio de nosso irmão (ou irmã) que partiu desta vida. Confiamos na misericórdia de Deus, que venceu a morte pela ressurreição de seu Filho Jesus Cristo. Que esta celebração nos console a nós que ficamos e interceda pela alma daquele que partiu. Reconheçamos os nossos pecados e a nossa condição de mortais diante de Deus.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bow</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Oremos. Ó Deus, glória dos fiéis e vida dos justos, vós que salvastes pelo sacramento do Batismo vosso servo (ou serva) que hoje vos entregamos: acolhei-o junto de vós na mansão dos santos e da luz eterna. Por Nosso Senhor Jesus Cristo, vosso Filho, que convosco vive e reina na unidade do Espírito Santo, Deus, para sempre.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>📖 Liturgia da Palavra</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Leitura do Livro de Jó. Eu sei que o meu Redentor vive, e que no último dia eu ressurgirei do pó da terra. Depois de recoberto por esta pele, na minha própria carne verei a Deus. Eu mesmo o verei, e não outro. Os meus olhos o verão. Esta é a minha esperança, que guardo em meu peito. Palavra do Senhor.</div>
+          <span class="badge badge-item">Server Book</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Salmo 22. O Senhor é meu pastor e nada me falta. Em verdes pastagens Ele me faz repousar, conduz-me a fontes tranquilas e restaura as minhas forças. Pelos caminhos retos Ele me guia por amor do seu nome. Ainda que eu percorra vales tenebrosos, não temerei mal algum, porque vós estais comigo. Vosso cajado e vosso báculo me dão segurança. Preparais para mim uma mesa ante meus inimigos. Derramais o perfume sobre a minha cabeça, e transborda o meu cálice. A bondade e a misericórdia hão de seguir-me todos os dias da minha vida. E habitarei na casa do Senhor por longos dias.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Leitura da Carta de São Paulo aos Romanos. Irmãos, se cremos que Jesus morreu e ressuscitou, também cremos que Deus reunirá com Jesus aqueles que morreram em Jesus. De fato, o Senhor mesmo descerá do céu ao sinal dado, à voz do arcanjo e ao som da trombeta de Deus; e os mortos em Cristo ressuscitarão em primeiro lugar. Assim estaremos sempre com o Senhor. Consolai-vos, pois, uns aos outros com estas palavras. Palavra do Senhor.</div>
+          <span class="badge badge-item">Server Book</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Proclamação do Santo Evangelho de Nosso Senhor Jesus Cristo segundo João.</div>
+          <span class="badge badge-item">Gospel</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+        <div class="people-response">Glória a vós, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Naquele tempo, disse Jesus a Marta: Eu sou a ressurreição e a vida. Aquele que crê em mim, ainda que morra, viverá; e todo aquele que vive e crê em mim não morrerá para sempre. Crês nisso? Ela respondeu: Sim, Senhor, creio que vós sois o Cristo, o Filho de Deus, aquele que devia vir ao mundo. Palavra da Salvação.</div>
+          <span class="badge badge-item">Gospel</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Glória a vós, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Irmãos e irmãs, a morte nos provoca a um silêncio interior profundo. Quando perdemos alguém que amamos, o coração pergunta: onde está ele agora? O que aconteceu com a pessoa que conheci, amei, com quem partilhei minha vida? A fé cristã não silencia essa dor, não finge que ela não existe. Mas nos oferece uma esperança que vai além da morte. Jesus disse: Eu sou a ressurreição e a vida. Não disse: eu vou mostrar onde está a ressurreição. Não disse: eu conheço o caminho para a vida. Disse: EU SOU. A ressurreição não é um evento distante, é uma Pessoa. É Jesus Cristo, que morreu e ressuscitou. E porque Ele ressuscitou, todos os que nele creem também ressuscitarão. Nosso irmão ou irmã que partiu viveu neste mundo, foi amado por Deus, recebeu a graça do Batismo. Hoje o entregamos nas mãos de Deus com confiança. Não com desespero, mas com esperança. Que o Senhor nos fortaleça nesta hora de saudade e nos dê a certeza de que um dia estaremos juntos na casa do Pai, onde não há mais dor, nem choro, nem morte. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Irmãos, confiemos ao Senhor nosso Deus a alma de nosso irmão que partiu. Pelos fiéis defuntos, especialmente por aquele que hoje lembramos, para que Deus, em sua misericórdia infinita, os acolha na luz e na paz eternas, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Pelos familiares e amigos que choram esta perda, para que o Senhor os console com a esperança da ressurreição e os fortaleça em sua dor, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Por todos nós aqui reunidos, para que esta celebração nos lembre da brevidade da vida e nos mova a viver cada dia em amor e fidelidade ao Evangelho, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Ó Deus, que tendes poder sobre a vida e sobre a morte, acolhei as nossas preces em favor de vosso servo e de todos os nossos irmãos que partiram desta vida. Que a luz da vossa glória ilumine seus rostos para sempre. Por Cristo Nosso Senhor. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>🍞 Liturgia Eucarística</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Bendito sejais, Senhor Deus do universo, pelo pão que recebemos da vossa bondade, fruto da terra e do trabalho humano, e que vos apresentamos: ele se tornará para nós o pão da vida.</div>
+          <span class="badge badge-item">Offering of the Bread</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Bendito seja Deus para sempre.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Bendito sejais, Senhor Deus do universo, pelo vinho que recebemos da vossa bondade, fruto da videira e do trabalho humano, e que vos apresentamos: ele se tornará para nós o cálice da salvação.</div>
+          <span class="badge badge-item">Offering of Chalice</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Bendito seja Deus para sempre.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Lavai-me, Senhor, da minha culpa, purificai-me do meu pecado.</div>
+          <span class="badge badge-item">Lavabo</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Orai, irmãos, para que este sacrifício, meu e vosso, seja agradável a Deus Pai todo-poderoso.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">O Senhor receba das vossas mãos este sacrifício para louvor e glória do seu nome, para nosso bem e de toda a sua santa Igreja.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Ó Deus, recebei a oferenda que vos apresentamos por vosso servo que chamaste a vós; e, como nele a fé nos une, assim a misericórdia vos mova a uni-lo a vós. Por Cristo Nosso Senhor. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco. Corações ao alto. Demos graças ao Senhor nosso Deus. Na verdade é nosso dever e nossa salvação dar-vos graças em todo o tempo e em todo o lugar, Senhor, Pai santo, Deus eterno e todo-poderoso. Em Cristo ressuscitou a nossa esperança. Por ele, que venceu a morte, ressurgiremos da morte para a vida. Por isso, com todos os anjos e santos, proclamamos a vossa glória, cantando a uma só voz.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Santo, Santo, Santo, é o Senhor Deus do universo! O céu e a terra proclamam a vossa glória. Hosana nas alturas! Bendito o que vem em nome do Senhor. Hosana nas alturas!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Na véspera de sua paixão, tomou o pão nas suas mãos santas e veneráveis e, elevando os olhos ao céu para vós, Deus seu Pai todo-poderoso, deu graças, partiu o pão e o deu a seus discípulos, dizendo: Tomai e comei todos vós, porque isto é o meu Corpo, que será entregue por vós.</div>
+          <span class="badge badge-item">Eucharist</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Eleva a hóstia — Raised Host 1 — toca os sinos — Bells</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Do mesmo modo, ao fim da ceia, tomou o cálice nas suas mãos santas e veneráveis e, dando graças novamente a vós, Deus seu Pai, o entregou a seus discípulos, dizendo: Tomai e bebei todos vós, porque este é o cálice do meu Sangue, o Sangue da nova e eterna aliança, que será derramado por vós e por todos, para a remissão dos pecados. Fazei isto em memória de mim.</div>
+          <span class="badge badge-item">Chalice Offering</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Eleva o cálice — Chalice Raised — toca os sinos — Bells</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Eis o mistério da fé!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Anunciamos, Senhor, a vossa morte e proclamamos a vossa ressurreição. Vinde, Senhor Jesus!</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Lembrai-vos também, Senhor, de vosso servo que hoje vos entregamos. Recebei-o no reino da luz e da paz, onde não haverá mais pranto, nem dor, nem morte. Que encontre junto de vós a plenitude da vida que esperou com fé. Por Cristo, com Cristo e em Cristo, a vós, Deus Pai todo-poderoso, na unidade do Espírito Santo, toda a honra e toda a glória, agora e para sempre.</div>
+          <span class="badge badge-item">Doxology 1</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Pai nosso que estais nos céus, santificado seja o vosso nome, venha a nós o vosso reino, seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje, perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido, e não nos deixeis cair em tentação, mas livrai-nos do mal.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Pois vosso é o reino, o poder e a glória para sempre, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Cordeiro de Deus, que tirais o pecado do mundo, dai-lhes o descanso. Cordeiro de Deus, que tirais o pecado do mundo, dai-lhes o descanso. Cordeiro de Deus, que tirais o pecado do mundo, dai-lhes o descanso eterno.</div>
+          <span class="badge badge-item">Angus Dei</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Eis o Cordeiro de Deus que tira o pecado do mundo. Felizes os chamados à Ceia do Senhor.</div>
+          <span class="badge badge-item">Raised Host 2</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Senhor, não sou digno de que entreis em minha morada, mas dizei uma só palavra e serei salvo.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Corpo de Cristo.</div>
+          <span class="badge badge-item">Communion (Priest)</span>
+          <span class="badge badge-anim">Kneel</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Corpo de Cristo.</div>
+          <span class="badge badge-item">Ciborium 1</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen. (cada fiel)</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Oremos. Deus todo-poderoso, que nos destes como alimento o Corpo e o Sangue de vosso Filho, concedei que esta Eucaristia em sufrágio de vosso servo seja para ele passagem à vida eterna. Por Cristo Nosso Senhor. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>✝ Absolvição e Ritos Finais</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Que vos abençoe Deus todo-poderoso, Pai, e Filho, e Espírito Santo.</div>
+          <span class="badge badge-item">Blessing</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Ide em paz. E rezai por nosso irmão que partiu.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Dai-lhe, Senhor, o descanso eterno. E que a luz perpétua o ilumine. Que ele descanse em paz.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- 14. MISSA NORMAL -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="section-normal" class="mass-section">
+    <div class="mass-hero">
+      <span class="tag">✦ Tipo 14 · Mais Comum</span>
+      <h2>Missa Normal</h2>
+      <div class="vestment-box">
+        <span class="vest-icon">👘</span>
+        <div class="vest-info">
+          <strong>Vestimenta — Depende do Tempo Litúrgico</strong>
+          Branco/Dourado → Páscoa (hoje: 01/05/2026 ainda é Tempo Pascal!) · Natal · Festas<br>
+          Verde → Tempo Comum (após Pentecostes, ~24/05)<br>
+          Roxo → Advento e Quaresma · Vermelho → Pentecostes e Mártires
+        </div>
+      </div>
+    </div>
+    <div class="mass-content">
+      <div class="legend">
+        <span><span class="badge badge-item">ITEM</span> Item a equipar</span>
+        <span><span class="badge badge-anim">ANIMAÇÃO</span> Animação a usar</span>
+        <span><span class="badge badge-none">SEM ITEM</span> Sem item equipado</span>
+      </div>
+
+      <div class="section-divider"><h3>⛪ Ritos Iniciais</h3></div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Caminha até o altar — genuflexão ou reverência</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Em nome do Pai, e do Filho, e do Espírito Santo.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">A graça de Nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">O Senhor esteja convosco.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Glória a Deus nas alturas, e paz na terra aos homens por Ele amados. Senhor Deus, rei dos céus, Deus Pai todo-poderoso, nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho do Pai, vós que tirais o pecado do mundo, tende piedade de nós; vós que tirais o pecado do mundo, acolhei a nossa súplica; vós que estais à direita do Pai, tende piedade de nós. Porque só vós sois o Santo, só vós o Senhor, só vós o Altíssimo, Jesus Cristo, com o Espírito Santo, na glória de Deus Pai. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Oremos. Ó Deus, que reunis vossos filhos neste dia para louvar o vosso nome e celebrar os santos mistérios, concedei-nos a graça de partirmos daqui renovados pelo vosso Espírito e mais unidos pelo amor fraterno. Por Nosso Senhor Jesus Cristo, vosso Filho, que convosco vive e reina na unidade do Espírito Santo, Deus, para sempre.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>📖 Liturgia da Palavra</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Leitura do Livro dos Atos dos Apóstolos. Naqueles dias, a multidão dos que haviam abraçado a fé tinha um só coração e uma só alma. Ninguém dizia ser seus os bens que possuía; mas tudo era comum entre eles. Com grande poder, os apóstolos davam testemunho da ressurreição do Senhor Jesus, e sobre todos eles havia grande graça. Não havia entre eles nenhum necessitado, pois todos os que possuíam campos ou casas vendiam-nos e traziam o valor das vendas e depositavam aos pés dos apóstolos. E repartia-se a cada um segundo a necessidade de cada qual. Palavra do Senhor.</div>
+          <span class="badge badge-item">Server Book</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Salmo 117. Dai graças ao Senhor porque Ele é bom, porque é eterna a sua misericórdia. Diga a casa de Israel: é eterna a sua misericórdia. A destra do Senhor age com poder, a destra do Senhor se levantou, a destra do Senhor age com poder. Não hei de morrer, mas hei de viver para contar as obras do Senhor. A pedra que os construtores rejeitaram tornou-se a pedra angular. Isso é obra do Senhor, e é maravilhoso a nossos olhos. Dai graças ao Senhor porque Ele é bom, porque é eterna a sua misericórdia.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Leitura da Primeira Carta de São João. Caríssimos, tudo o que nasceu de Deus vence o mundo, e esta é a vitória que venceu o mundo: a nossa fé. Quem vence o mundo senão aquele que crê que Jesus é o Filho de Deus? Nós sabemos que passamos da morte para a vida, porque amamos os irmãos. Quem não ama permanece na morte. Filhinhos, não amemos de palavra nem de boca, mas por obras e com verdade. Palavra do Senhor.</div>
+          <span class="badge badge-item">Server Book</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Aleluia, Aleluia! Jesus disse: Eu sou o caminho, a verdade e a vida; ninguém vem ao Pai a não ser por mim. Aleluia!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Proclamação do Santo Evangelho de Nosso Senhor Jesus Cristo segundo João.</div>
+          <span class="badge badge-item">Gospel</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+        <div class="people-response">Glória a vós, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Naquele tempo, disse Jesus a seus discípulos: Não se turbe o vosso coração. Credes em Deus; crede também em mim. Na casa de meu Pai há muitas moradas. Se não fosse assim, eu vo-lo teria dito. Vou preparar-vos um lugar. E quando eu for e vos preparar um lugar, voltarei e vos tomarei comigo, para que onde eu estou, vós também estejais. E vós sabeis o caminho para onde eu vou. Disse-lhe Tomé: Senhor, não sabemos para onde vais; como podemos saber o caminho? Respondeu-lhe Jesus: Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai a não ser por mim. Se vós me conheceis, também conhecereis meu Pai. E desde agora o conheceis e o vedes. Palavra da Salvação.</div>
+          <span class="badge badge-item">Gospel</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Glória a vós, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Irmãos e irmãs, Jesus diz hoje para cada um de nós: Não se turbe o vosso coração. Vivemos em um mundo cheio de turbulências, de incertezas, de medos. A vida nos apresenta diariamente situações que nos deixam ansiosos, preocupados, inseguros. E é exatamente nesse contexto que Jesus fala: Não se turbe o vosso coração. Mas isso não é uma ordem fria, é um convite. Porque Jesus não nos pede simplesmente para não ter medo; Ele nos dá o motivo pelo qual não precisamos temer: Eu sou o caminho, a verdade e a vida. Jesus não aponta um caminho do lado de fora. Ele É o caminho. Não há uma rota que devemos descobrir sozinhos; a rota é a própria pessoa de Jesus Cristo. Quando nos perdemos nos labirintos da vida, quando não sabemos para onde ir, quando as escolhas parecem impossíveis, voltamos a Jesus. Ficamos com Ele. E Ele nos conduz. Jesus também é a verdade. Num mundo repleto de mentiras, de fake news, de relativismos, de verdades descartáveis, Jesus é a Verdade que permanece. A verdade sobre quem somos, a verdade sobre o sentido da vida, a verdade sobre o amor de Deus. E Jesus é a vida. Não apenas uma vida melhor, não apenas uma vida depois da morte, mas a vida em sua plenitude, a vida que começa aqui e agora quando nos unimos a Ele. Que esta Eucaristia que celebramos hoje nos una mais profundamente a Jesus, que é nosso caminho, nossa verdade e nossa vida. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Creio em um só Deus, Pai todo-poderoso, criador do céu e da terra, de todas as coisas visíveis e invisíveis. Creio em um só Senhor, Jesus Cristo, Filho Unigênito de Deus, nascido do Pai antes de todos os séculos: Deus de Deus, Luz da Luz, Deus verdadeiro de Deus verdadeiro; gerado, não criado, consubstancial ao Pai. Por Ele todas as coisas foram feitas. E por nós, homens, e para nossa salvação desceu dos céus: e se encarnou pelo Espírito Santo, no seio da Virgem Maria, e se fez homem. Foi crucificado por nós sob Pôncio Pilatos; padeceu e foi sepultado. Ressuscitou ao terceiro dia, conforme as Escrituras; subiu aos céus, está sentado à direita do Pai. E de novo há de vir em sua glória para julgar os vivos e os mortos; e o seu reino não terá fim. Creio no Espírito Santo, Senhor que dá a vida, e procede do Pai e do Filho; e com o Pai e o Filho é adorado e glorificado: Ele que falou pelos profetas. Creio na Igreja una, santa, católica e apostólica. Professo um só Batismo para a remissão dos pecados. Espero a ressurreição dos mortos e a vida do mundo que há de vir. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Sign of the Cross [PRIEST]</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Irmãos, levemos ao Senhor nossas preces com confiança. Pela Santa Igreja universal e por nosso Papa, para que o Espírito Santo a guie com sabedoria na missão de anunciar o Evangelho a todas as nações, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Por todos os que sofrem: doentes, pobres, refugiados, os que perderam emprego ou lar, para que encontrem na comunidade cristã o conforto e a ajuda de que necessitam, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Por cada um de nós aqui reunidos, para que saiamos desta celebração com o coração transformado pelo amor de Deus e prontos para servi-lo nos irmãos, oremos.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Senhor, ouvi a nossa oração.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Ouvi, Senhor, as preces que vos dirigimos com humildade e concedei-nos o que pedimos de acordo com a vossa vontade amorosa. Por Cristo Nosso Senhor. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>🍞 Liturgia Eucarística</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Bendito sejais, Senhor Deus do universo, pelo pão que recebemos da vossa bondade, fruto da terra e do trabalho humano, e que vos apresentamos: ele se tornará para nós o pão da vida.</div>
+          <span class="badge badge-item">Offering of the Bread</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Bendito seja Deus para sempre.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Bendito sejais, Senhor Deus do universo, pelo vinho que recebemos da vossa bondade, fruto da videira e do trabalho humano, e que vos apresentamos: ele se tornará para nós o cálice da salvação.</div>
+          <span class="badge badge-item">Offering of Chalice</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Bendito seja Deus para sempre.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Pela humildade do coração e com espírito contrito sejamos acolhidos por vós, Senhor, e que o nosso sacrifício suba hoje à vossa presença e vos seja agradável.</div>
+          <span class="badge badge-item">Cruets</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Lavai-me, Senhor, da minha culpa, purificai-me do meu pecado.</div>
+          <span class="badge badge-item">Lavabo</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Orai, irmãos, para que este sacrifício, meu e vosso, seja agradável a Deus Pai todo-poderoso.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">O Senhor receba das vossas mãos este sacrifício para louvor e glória do seu nome, para nosso bem e de toda a sua santa Igreja.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Recebei, Senhor, a oferenda que vos trazemos com alegria neste dia, e fazei de nós, que participamos deste sacrifício, uma hóstia viva para vosso louvor e glória. Por Cristo Nosso Senhor. Amen.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Corações ao alto.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Nossos corações estão junto do Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Demos graças ao Senhor nosso Deus.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">É nosso dever e nossa salvação.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Na verdade é nosso dever e nossa salvação dar-vos graças em todo o tempo e em todo o lugar, Senhor, Pai santo, Deus eterno e todo-poderoso, por Cristo Senhor nosso. Pois Ele é o verdadeiro sacerdote eterno, o qual se ofereceu a vós como sacrifício imaculado de paz, e nos distribuiu o mistério de vossa redenção. Ele, quebrando o pão e distribuindo-o, dá-se a si mesmo; e, derramando o sangue, lava os pecados de todos. Por isso, com todos os anjos e santos, proclamamos a vossa glória, cantando a uma só voz.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Santo, Santo, Santo, é o Senhor Deus do universo! O céu e a terra proclamam a vossa glória. Hosana nas alturas! Bendito o que vem em nome do Senhor. Hosana nas alturas!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Na verdade, Pai santíssimo, é justo e necessário, é nosso dever e nossa salvação dar-vos sempre graças por Jesus Cristo, vosso Filho amado. Por Ele é que nos criastes, enchestes de vossos benefícios e nos enviastes como Redentor, feito homem pelo Espírito Santo e nascido da Virgem. Ele, cumprindo a vossa vontade e adquirindo para vós um povo santo, estendeu as mãos ao sofrimento para libertar da morte os que criam em vós. Suplicamos-vos, Pai de bondade: santificai estas oferendas pelo mesmo Espírito; dignai-vos transformá-las no Corpo e no Sangue de Jesus Cristo, Senhor nosso, que vai entregar-se livremente à sua paixão.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Toca os sinos — Bells — antes da consagração — Pray</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Na véspera de sua paixão, tomou o pão nas suas mãos santas e veneráveis e, elevando os olhos ao céu para vós, Deus seu Pai todo-poderoso, deu graças, partiu o pão e o deu a seus discípulos, dizendo: Tomai e comei todos vós, porque isto é o meu Corpo, que será entregue por vós.</div>
+          <span class="badge badge-item">Eucharist</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Eleva a hóstia — Raised Host 1 — Pray — toca os sinos — Bells</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Do mesmo modo, ao fim da ceia, tomou o cálice nas suas mãos santas e veneráveis e, dando graças novamente a vós, Deus seu Pai, o entregou a seus discípulos, dizendo: Tomai e bebei todos vós, porque este é o cálice do meu Sangue, o Sangue da nova e eterna aliança, que será derramado por vós e por todos, para a remissão dos pecados. Fazei isto em memória de mim.</div>
+          <span class="badge badge-item">Chalice Offering</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Eleva o cálice — Chalice Raised — Pray — toca os sinos — Bells</div></div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Eis o mistério da fé!</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Anunciamos, Senhor, a vossa morte e proclamamos a vossa ressurreição. Vinde, Senhor Jesus!</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Celebrando agora o memorial da morte e ressurreição de vosso Filho, oferecemos-vos, Senhor, o pão da vida e o cálice da salvação, e vos agradecemos porque nos tornastes dignos de assistir à vossa presença e de vos servir. Suplicamos-vos humildemente que, participando do Corpo e do Sangue de Cristo, sejamos reunidos pelo Espírito Santo em um só corpo. Lembrai-vos, Senhor, de vossa Igreja espalhada por toda a terra; fazei-a crescer na caridade, juntamente com nosso Papa, com todo o episcopado e com o clero. Tende piedade de todos nós e dai-nos participar da vida eterna juntamente com a Bem-Aventurada Virgem Maria, Mãe de Deus, com os apóstolos e mártires, e com todos os santos que em todos os tempos vos foram agradáveis, e possamos louvar-vos e glorificar-vos. Por Cristo, com Cristo e em Cristo, a vós, Deus Pai todo-poderoso, na unidade do Espírito Santo, toda a honra e toda a glória, agora e para sempre.</div>
+          <span class="badge badge-item">Doxology 1</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>🙏 Rito da Comunhão</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Fiéis ao ensinamento do Salvador e seguindo sua divina instrução, ousamos dizer: Pai nosso que estais nos céus, santificado seja o vosso nome, venha a nós o vosso reino, seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje, perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido, e não nos deixeis cair em tentação, mas livrai-nos do mal.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Pois vosso é o reino, o poder e a glória para sempre, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Livrai-nos, Senhor, de todos os males passados, presentes e futuros; e por intercessão da bem-aventurada e gloriosa sempre Virgem Maria, Mãe de Deus, do bem-aventurado são José, dos bem-aventurados apóstolos Pedro e Paulo, e de todos os santos, dai-nos propícios a paz em nossos dias, para que, ajudados por vossa misericórdia, estejamos sempre livres do pecado e seguros de toda perturbação. Por Nosso Senhor Jesus Cristo, vosso Filho, que convosco vive e reina na unidade do Espírito Santo, Deus, para sempre.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Pois vosso é o reino, o poder e a glória para sempre, Senhor.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">A paz do Senhor esteja sempre convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">O Senhor esteja convosco.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Dai um sinal de paz uns aos outros.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Cordeiro de Deus, que tirais o pecado do mundo, tende piedade de nós. Cordeiro de Deus, que tirais o pecado do mundo, tende piedade de nós. Cordeiro de Deus, que tirais o pecado do mundo, dai-nos a paz.</div>
+          <span class="badge badge-item">Angus Dei</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Eis o Cordeiro de Deus que tira o pecado do mundo. Felizes os chamados à Ceia do Senhor.</div>
+          <span class="badge badge-item">Raised Host 2</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Senhor, não sou digno de que entreis em minha morada, mas dizei uma só palavra e serei salvo.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Corpo de Cristo.</div>
+          <span class="badge badge-item">Communion (Priest)</span>
+          <span class="badge badge-anim">Kneel</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Sangue de Cristo.</div>
+          <span class="badge badge-item">Drink Chalice</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Corpo de Cristo.</div>
+          <span class="badge badge-item">Ciborium 1</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen. (cada fiel que recebe)</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Oremos. Senhor, que nos alimentastes com o Corpo e o Sangue de vosso Filho, fazei que sejamos sempre membros vivos d'Aquele que é o pão vivo descido do céu. Por Cristo Nosso Senhor.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Pray</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+
+      <div class="section-divider"><h3>✝ Ritos Finais</h3></div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">O Senhor esteja convosco.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Ele está no meio de nós.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">Que vos abençoe Deus todo-poderoso, Pai, e Filho, e Espírito Santo.</div>
+          <span class="badge badge-item">Blessing</span>
+          <span class="badge badge-anim">Bless</span>
+        </div>
+        <div class="people-response">Amen.</div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="fala">A missa está encerrada. Ide em paz.</div>
+          <span class="badge badge-item">Microphone</span>
+          <span class="badge badge-anim">Hands Risen</span>
+        </div>
+        <div class="people-response">Graças a Deus.</div>
+      </div>
+      <div class="step">
+        <div class="step-line action"><div class="fala action-text">Reverência final ao altar — Bow — e saída</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLACEHOLDER SECTIONS for other masses -->
+  <script>
+    // Generate placeholder sections for masses not yet written
+    const masses = {
+      cantada: { num: '02', name: 'Missa Cantada', vest: '⚪ Mesma cor do tempo litúrgico. Destaque para ornamentos dourados cantados. Estola bordada.' },
+      rezada: { num: '03', name: 'Missa Rezada', vest: '👘 Cor do tempo litúrgico. Vestes simples sem ornamento excessivo. Estola simples.' },
+      pontifical: { num: '04', name: 'Missa Pontifical', vest: '⚡ Cor do tempo litúrgico + Mitra + Báculo (Crozier) + Luvas litúrgicas + Sandálias pontificais. Apenas para Bispos.' },
+      preceito: { num: '05', name: 'Missa de Preceito', vest: '👘 Cor do tempo litúrgico. Idêntica à Missa Normal. Hoje (01/05/2026): Branco/Dourado.' },
+      vigilia: { num: '06', name: 'Missa de Vigília', vest: '🕯 Cor do tempo litúrgico seguinte (antecipa o dia). Celebrada após as 16h do sábado.' },
+      votiva: { num: '07', name: 'Missa Votiva', vest: '🎯 Cor do tema da Missa Votiva: Branco para Nossa Senhora, Vermelho para o Espírito Santo, Roxo para os Defuntos.' },
+      nupcial: { num: '09', name: 'Missa Nupcial', vest: '💍 Branco ou Dourado. Stola branca com ornamentos nupciais.' },
+      crismal: { num: '10', name: 'Missa Crismal', vest: '🛢 Branco/Dourado. Celebrada pelo Bispo na Quinta-Feira Santa com todo o clero diocesano.' },
+      campal: { num: '11', name: 'Missa Campal', vest: '🌿 Cor do tempo litúrgico. Adaptada para espaço aberto. Altar improvisado ao ar livre.' },
+      tridentina: { num: '12', name: 'Missa Tridentina', vest: '⚜ Cor do tempo litúrgico em rito antigo. Manípulo + Cíngulo + Amicto + Alva + Casula com cauda longa.' },
+      liturgia: { num: '13', name: 'Divina Liturgia', vest: '🏛 Epitrachelion + Felônio + Zona + Epimaníkia. Cores variam por rito (Bizantino, Copta, Armênio).' }
+    };
+
+    const main = document.getElementById('main');
+    for (const [id, data] of Object.entries(masses)) {
+      const div = document.createElement('div');
+      div.id = `section-${id}`;
+      div.className = 'mass-section';
+      div.innerHTML = `
+        <div class="mass-hero">
+          <span class="tag">✦ Tipo ${data.num}</span>
+          <h2>${data.name}</h2>
+          <div class="vestment-box">
+            <span class="vest-icon">${data.vest.split(' ')[0]}</span>
+            <div class="vest-info">
+              <strong>Vestimenta</strong>
+              ${data.vest.replace(/^[^\s]+\s/, '')}
+            </div>
+          </div>
+        </div>
+        <div class="mass-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;">
+          <div style="font-size:3rem;margin-bottom:20px;opacity:0.3;">✝</div>
+          <p style="font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.15em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:12px;">Em construção</p>
+          <p style="color:var(--cream-dark);max-width:400px;line-height:1.7;font-size:0.9rem;">As falas completas da <strong>${data.name}</strong> serão adicionadas em breve. As missas <strong>Solene</strong>, <strong>Normal</strong> e <strong>Réquiem</strong> já estão completas!</p>
+        </div>
+      `;
+      main.appendChild(div);
+    }
+  </script>
+
+</main>
+
+<script>
+  function show(id) {
+    document.getElementById('welcome').style.display = 'none';
+    document.querySelectorAll('.mass-section').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('section-' + id);
+    if (el) el.classList.add('active');
+    document.querySelectorAll('#mass-list a').forEach(a => a.classList.remove('active'));
+    event.target.classList.add('active');
+    window.scrollTo(0, 0);
+    return false;
+  }
+</script>
+</body>
+</html>
