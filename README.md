@@ -20,10 +20,10 @@ Este repositório é um kit completo para seminaristas e celebrantes do mapa **T
 
 ## 📂 Conteúdo do Repositório
 
-> .[!WARNING].
+
+> [!WARNING]
 > **EXECUTE O PRIMEIRO SCRIPT** **(Exploit One) POIS ELE É O PRINCIPAL**, **DEPOIS DELE EXECUTE O SEGUNDO (Exploite Two)**
 
----
 
 | Arquivo/Pasta | Descrição |
 | :--- | :--- |
